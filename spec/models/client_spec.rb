@@ -4,6 +4,8 @@ RSpec.describe Client, type: :model do
   subject { build(:client) }
 
   describe 'via relations' do
+    it { is_expected.to have_many(:contracts) }
+    it { is_expected.to have_many(:insurances).through(:contracts) }
   end
 
   describe 'via validations' do

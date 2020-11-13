@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_13_155746) do
+ActiveRecord::Schema.define(version: 2020_11_13_164646) do
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 2020_11_13_155746) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "agent_id", null: false
+    t.bigint "insurance_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agent_id"], name: "index_contracts_on_agent_id"
+    t.index ["client_id"], name: "index_contracts_on_client_id"
+    t.index ["insurance_id"], name: "index_contracts_on_insurance_id"
   end
 
   create_table "insurances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -41,4 +52,6 @@ ActiveRecord::Schema.define(version: 2020_11_13_155746) do
     t.index ["type"], name: "index_users_on_type"
   end
 
+  add_foreign_key "contracts", "clients"
+  add_foreign_key "contracts", "insurances"
 end
