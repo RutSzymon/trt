@@ -5,10 +5,6 @@ shared_examples "User" do
   end
 
   describe "via validations" do
-    it { is_expected.to validate_presence_of(:name) }
-
-    it { is_expected.to validate_presence_of(:surname) }
-
     it { is_expected.to validate_presence_of(:email) }
 
     it { is_expected.to validate_uniqueness_of(:email) }
@@ -16,11 +12,15 @@ shared_examples "User" do
     it { is_expected.to allow_value("email@addresse.foo").for(:email) }
 
     it { is_expected.to_not allow_value("foo").for(:email) }
+
+    it { is_expected.to validate_presence_of(:name) }
+
+    it { is_expected.to validate_presence_of(:surname) }
   end
 
   describe "DB columns" do
     it "should have all columns" do
-      columns = %w(id name surname email created_at updated_at)
+      columns = %w(id name surname email type created_at updated_at)
       expect(described_class.column_names).to include(*columns)
     end
   end
