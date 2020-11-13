@@ -1,7 +1,7 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Operator, type: :model do
-  subject{ build(:operator) }
+  subject { build(:operator) }
 
-  it_should_behave_like "User"
+  it_should_behave_like 'User'
 end

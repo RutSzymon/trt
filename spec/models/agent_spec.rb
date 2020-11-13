@@ -1,7 +1,7 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Agent, type: :model do
-  subject{ build(:agent) }
+  subject { build(:agent) }
 
-  it_should_behave_like "User"
+  it_should_behave_like 'User'
 end

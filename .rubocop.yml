@@ -1,0 +1,30 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'bin/{rails,rake,bundle}'
+    - 'db/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+Style/AsciiComments:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 160
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/**/*'
