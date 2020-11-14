@@ -6,10 +6,24 @@ AllCops:
     - 'bin/{rails,rake,bundle}'
     - 'db/**/*'
 
-Style/Documentation:
-  Enabled: false
+Layout/LineLength:
+  Max: 160
 
-Style/FrozenStringLiteralComment:
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'app/queries/*'
+    - 'app/controllers/graphql_controller.rb'
+
+Naming/MethodParameterName:
+  Exclude:
+    - 'app/controllers/graphql_controller.rb'
+
+Naming/PredicateName:
   Enabled: false
 
 Naming/VariableNumber:
@@ -18,13 +32,8 @@ Naming/VariableNumber:
 Style/AsciiComments:
   Enabled: false
 
-Naming/PredicateName:
+Style/Documentation:
   Enabled: false
 
-Layout/LineLength:
-  Max: 160
-
-Metrics/BlockLength:
-  Exclude:
-    - 'config/routes.rb'
-    - 'spec/**/*'
+Style/FrozenStringLiteralComment:
+  Enabled: false

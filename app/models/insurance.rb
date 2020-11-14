@@ -3,8 +3,8 @@ class Insurance < ApplicationRecord
 
   enum kind: KINDS
 
-  validates :agency_name, presence: :true
-  validates :name, presence: :true
-  validates :period, presence: :true
-  validates :total_cost, presence: :true
+  validates :agency_name, presence: true
+  validates :name, presence: true
+  validates :period, presence: true
+  validates :total_cost, presence: true
 end
