@@ -3,11 +3,7 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-                               description: 'An example field added by the generator'
-    def test_field
-      'Hello World!'
-    end
+    field :fetch_clients, resolver: Queries::FetchClients
+    field :fetch_client, resolver: Queries::FetchClient
   end
 end
