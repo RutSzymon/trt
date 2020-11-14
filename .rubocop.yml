@@ -17,6 +17,7 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - 'app/queries/*'
+    - 'app/graphql/**/*'
     - 'app/controllers/graphql_controller.rb'
 
 Naming/MethodParameterName:
