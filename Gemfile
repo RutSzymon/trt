@@ -25,6 +25,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+# Custom project-related gems
+
+gem 'graphql', '1.9.18' # Ruby implementation of GraphQL
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -33,6 +37,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'graphiql-rails' # Mount the GraphiQL query editor in a Rails app
   gem 'listen', '~> 3.2'
   gem 'rubocop', '~> 0.93', require: false
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
