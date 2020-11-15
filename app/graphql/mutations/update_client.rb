@@ -5,8 +5,11 @@ module Mutations
 
     field :client, Types::ClientType, null: false
 
+    def client
+      @client ||= Client.find(id)
+    end
+
     def resolve(id:, params:)
-      client = Client.find(id)
       client_params = Hash params
 
       begin
@@ -18,6 +21,15 @@ module Mutations
       rescue ActiveRecord::RecordInvalid => e
         GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
           " #{e.record.errors.full_messages.join(', ')}")
+      end
+    end
+
+    def authorized?(id:, params:)
+      @client = Client.find(id)
+      if !context[:current_ability].can?(:update, client)
+        raise GraphQL::ExecutionError, "Access denied"
+      else
+        true
       end
     end
   end

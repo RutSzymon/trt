@@ -1,5 +1,5 @@
 module Mutations
-  class AddClient < Mutations::BaseMutation
+  class AddClient < Mutations::BaseAddMutation
     argument :params, Types::Input::ClientInputType, required: true
 
     field :client, Types::ClientType, null: false
