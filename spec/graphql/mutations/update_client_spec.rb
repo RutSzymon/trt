@@ -4,9 +4,9 @@ module Mutations
   RSpec.describe UpdateClient, type: :request do
     let(:agent) { create(:agent) }
     let(:operator) { create(:operator) }
-    let(:agent_header) { { "AUTHENTICATED_SCOPE" => "agent", "AUTHENTICATED_USERID" => agent.id } }
-    let(:operator_header) { { "AUTHENTICATED_SCOPE" => "operator", "AUTHENTICATED_USERID" => operator.id } }
-    let!(:client) { create(:client, name: "Stephen", surname: 'King', email: 's.king@mail.com') }
+    let(:agent_header) { { 'AUTHENTICATED_SCOPE' => 'agent', 'AUTHENTICATED_USERID' => agent.id } }
+    let(:operator_header) { { 'AUTHENTICATED_SCOPE' => 'operator', 'AUTHENTICATED_USERID' => operator.id } }
+    let!(:client) { create(:client, name: 'Stephen', surname: 'King', email: 's.king@mail.com') }
 
     describe '.resolve' do
       context 'operator' do
@@ -21,7 +21,7 @@ module Mutations
           json = JSON.parse(response.body)
           data = json['data'].dig('updateClient', 'client')
 
-          expect(data).to include('id' => "#{client.id}", 'name' => 'John', 'surname' => 'Smith', 'email' => 'j.smith@mail.com')
+          expect(data).to include('id' => client.id.to_s, 'name' => 'John', 'surname' => 'Smith', 'email' => 'j.smith@mail.com')
         end
       end
 
@@ -37,7 +37,7 @@ module Mutations
           json = JSON.parse(response.body)
           data = json['data'].dig('updateClient', 'client')
 
-          expect(data).to include('id' => "#{client.id}", 'name' => 'John', 'surname' => 'Smith', 'email' => 'j.smith@mail.com')
+          expect(data).to include('id' => client.id.to_s, 'name' => 'John', 'surname' => 'Smith', 'email' => 'j.smith@mail.com')
         end
       end
     end

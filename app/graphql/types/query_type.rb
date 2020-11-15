@@ -5,5 +5,8 @@ module Types
 
     field :fetch_clients, resolver: Queries::FetchClients
     field :fetch_client, resolver: Queries::FetchClient
+
+    field :fetch_contracts, resolver: Queries::FetchContracts
+    field :fetch_contract, resolver: Queries::FetchContract
   end
 end
