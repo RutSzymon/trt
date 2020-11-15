@@ -27,6 +27,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Custom project-related gems
 
+gem 'cancan' # Authorization Gem for Ruby on Rails.
 gem 'graphql', '1.9.18' # Ruby implementation of GraphQL
 
 group :development, :test do
