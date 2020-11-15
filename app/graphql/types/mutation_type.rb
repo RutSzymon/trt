@@ -1,5 +1,9 @@
 module Types
   class MutationType < Types::BaseObject
+    field :add_agent, mutation: Mutations::AddAgent
+    field :update_agent, mutation: Mutations::UpdateAgent
+    field :delete_agent, mutation: Mutations::DeleteAgent
+
     field :add_client, mutation: Mutations::AddClient
     field :update_client, mutation: Mutations::UpdateClient
     field :delete_client, mutation: Mutations::DeleteClient

@@ -1,31 +1,31 @@
 require 'rails_helper'
 
 module Mutations
-  RSpec.describe DeleteOperator, type: :request do
-    let(:agent) { create(:agent) }
-    let!(:operator) { create(:operator) }
+  RSpec.describe DeleteAgent, type: :request do
+    let!(:agent) { create(:agent) }
+    let(:operator) { create(:operator) }
     let(:agent_header) { { 'AUTHENTICATED_SCOPE' => 'agent', 'AUTHENTICATED_USERID' => agent.id } }
     let(:operator_header) { { 'AUTHENTICATED_SCOPE' => 'operator', 'AUTHENTICATED_USERID' => operator.id } }
-    let!(:subject) { create(:operator, name: 'Stephen', surname: 'King', email: 's.king@mail.com') }
+    let!(:subject) { create(:agent, name: 'Stephen', surname: 'King', email: 's.king@mail.com') }
 
     describe '.resolve' do
       context 'operator' do
-        it 'removes a operator' do
-          expect { post '/graphql', params: { query: query }, headers: operator_header }.to change { Operator.count }.by(-1)
+        it 'removes a agent' do
+          expect { post '/graphql', params: { query: query }, headers: operator_header }.to change { Agent.count }.by(-1)
         end
 
-        it 'returns a operator' do
+        it 'returns a agent' do
           post '/graphql', params: { query: query }, headers: operator_header
           json = JSON.parse(response.body)
-          data = json['data'].dig('deleteOperator', 'operator')
+          data = json['data'].dig('deleteAgent', 'agent')
 
           expect(data).to include('id' => subject.id.to_s, 'name' => 'Stephen', 'surname' => 'King', 'email' => 's.king@mail.com')
         end
       end
 
       context 'agent' do
-        it 'doesn\'t remove a operator' do
-          expect { post '/graphql', params: { query: query }, headers: agent_header }.to_not(change { Operator.count })
+        it 'doesn\'t remove a agent' do
+          expect { post '/graphql', params: { query: query }, headers: agent_header }.to_not(change { Agent.count })
         end
 
         it 'returns access denied' do
@@ -41,8 +41,8 @@ module Mutations
     def query
       <<~GQL
         mutation {
-          deleteOperator(input: { id: #{subject.id}}) {
-            operator {
+          deleteAgent(input: { id: #{subject.id}}) {
+            agent {
               id
               name
               surname

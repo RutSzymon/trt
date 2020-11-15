@@ -3,6 +3,9 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
+    field :fetch_agents, resolver: Queries::FetchAgents
+    field :fetch_agent, resolver: Queries::FetchAgent
+
     field :fetch_clients, resolver: Queries::FetchClients
     field :fetch_client, resolver: Queries::FetchClient
 

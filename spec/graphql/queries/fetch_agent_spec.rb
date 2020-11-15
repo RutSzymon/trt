@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 module Queries
-  RSpec.describe FetchOperator, type: :request do
+  RSpec.describe FetchAgent, type: :request do
     let(:agent) { create(:agent) }
     let(:operator) { create(:operator) }
     let(:agent_header) { { 'AUTHENTICATED_SCOPE' => 'agent', 'AUTHENTICATED_USERID' => agent.id } }
     let(:operator_header) { { 'AUTHENTICATED_SCOPE' => 'operator', 'AUTHENTICATED_USERID' => operator.id } }
-    let!(:subject) { create(:operator, name: 'Stephen', surname: 'King', email: 's.king@mail.com') }
+    subject { create(:agent, name: 'Stephen', surname: 'King', email: 's.king@mail.com') }
 
     describe '.resolve' do
       context 'operator' do
@@ -14,24 +14,23 @@ module Queries
           post '/graphql', params: { query: query(id: subject.id) }, headers: operator_header
 
           json = JSON.parse(response.body)
-          data = json['data']['fetchOperator']
+          data = json['data']['fetchAgent']
 
           expect(data).to include('id' => subject.id.to_s, 'name' => 'Stephen', 'surname' => 'King', 'email' => 's.king@mail.com')
         end
       end
 
       context 'agent' do
-        it 'returns operator for provided id if is agent\'s contact' do
-          agent.contacts << subject
-          post '/graphql', params: { query: query(id: subject.id) }, headers: agent_header
+        it 'returns himself' do
+          post '/graphql', params: { query: query(id: agent.id) }, headers: agent_header
 
           json = JSON.parse(response.body)
-          data = json['data']['fetchOperator']
+          data = json['data']['fetchAgent']
 
-          expect(data).to include('id' => subject.id.to_s, 'name' => 'Stephen', 'surname' => 'King', 'email' => 's.king@mail.com')
+          expect(data).to include('id' => agent.id.to_s, 'name' => agent.name, 'surname' => agent.surname, 'email' => agent.email)
         end
 
-        it 'returns access denied' do
+        it 'returns access denied to other agents' do
           post '/graphql', params: { query: query(id: subject.id) }, headers: agent_header
 
           json = JSON.parse(response.body)
@@ -45,7 +44,7 @@ module Queries
     def query(id:)
       <<~GQL
         query {
-          fetchOperator(id: #{id}) {
+          fetchAgent(id: #{id}) {
             id
             name
             surname
