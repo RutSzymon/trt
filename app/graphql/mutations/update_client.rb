@@ -5,11 +5,8 @@ module Mutations
 
     field :client, Types::ClientType, null: false
 
-    def client
-      @client ||= Client.find(id)
-    end
-
     def resolve(id:, params:)
+      client = Client.find(id)
       client_params = Hash params
 
       begin
@@ -25,12 +22,10 @@ module Mutations
     end
 
     def authorized?(id:, params:)
-      @client = Client.find(id)
-      if !context[:current_ability].can?(:update, client)
-        raise GraphQL::ExecutionError, "Access denied"
-      else
-        true
-      end
+      client = Client.find(id)
+      return true if context[:current_ability].can?(:update, client)
+
+      raise GraphQL::ExecutionError, 'Access denied'
     end
   end
 end

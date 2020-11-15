@@ -6,7 +6,7 @@ module Mutations
     let(:operator) { create(:operator) }
     let(:agent_header) { { "AUTHENTICATED_SCOPE" => "agent", "AUTHENTICATED_USERID" => agent.id } }
     let(:operator_header) { { "AUTHENTICATED_SCOPE" => "operator", "AUTHENTICATED_USERID" => operator.id } }
-    let!(:client) { create(:client, name: "William", surname: 'Penn', email: 'w.penn@mail.com') }
+    let!(:client) { create(:client, name: "Stephen", surname: 'King', email: 's.king@mail.com') }
 
     describe '.resolve' do
       context 'operator' do
