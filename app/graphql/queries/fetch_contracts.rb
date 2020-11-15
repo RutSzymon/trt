@@ -3,7 +3,7 @@ module Queries
     type [Types::ContractType], null: false
 
     def resolve
-      Contract.all.order(created_at: :desc)
+      Contract.accessible_by(context[:current_ability]).order(created_at: :desc)
     end
   end
 end

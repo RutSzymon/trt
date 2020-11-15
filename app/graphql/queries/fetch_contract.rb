@@ -11,5 +11,12 @@ module Queries
       GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
         " #{e.record.errors.full_messages.join(', ')}")
     end
+
+    def authorized?(id:)
+      contract = Contract.find(id)
+      return true if context[:current_ability].can?(:read, contract)
+
+      raise GraphQL::ExecutionError, 'Access denied'
+    end
   end
 end

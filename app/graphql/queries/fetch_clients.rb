@@ -3,7 +3,7 @@ module Queries
     type [Types::ClientType], null: false
 
     def resolve
-      Client.all.order(created_at: :desc)
+      Client.accessible_by(context[:current_ability]).order(created_at: :desc)
     end
   end
 end
