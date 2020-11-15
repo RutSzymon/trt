@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :surname
       t.string :email
       t.string :type, index: true
+      t.integer :contacts_count, default: 0, index: true
 
       t.timestamps
     end

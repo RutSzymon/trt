@@ -4,5 +4,6 @@ module Types
     field :name, String, null: false
     field :surname, String, null: false
     field :email, String, null: false
+    field :contacts_count, Int, null: false
   end
 end

@@ -9,6 +9,10 @@ AllCops:
 Layout/LineLength:
   Max: 160
 
+Lint/UnusedMethodArgument:
+  Exclude:
+    - app/graphql/**/*
+
 Metrics/AbcSize:
   Exclude:
     - 'app/controllers/graphql_controller.rb'

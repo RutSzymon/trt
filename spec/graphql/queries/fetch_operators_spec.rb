@@ -10,16 +10,22 @@ module Queries
 
     describe '.resolve' do
       context 'operator' do
-        it 'returns all operators' do
+        it 'returns all operators ordered by contacts_count' do
+          operator.contacts << [agent]
+          operators[1].contacts << [agent, create(:agent)]
+
           post '/graphql', params: { query: query }, headers: operator_header
 
           json = JSON.parse(response.body)
           data = json['data']['fetchOperators']
 
           expect(data).to match_array [
-            hash_including('id' => operator.id.to_s, 'name' => operator.name, 'surname' => operator.surname, 'email' => operator.email),
-            hash_including('id' => operators[0].id.to_s, 'name' => operators[0].name, 'surname' => operators[0].surname, 'email' => operators[0].email),
-            hash_including('id' => operators[1].id.to_s, 'name' => operators[1].name, 'surname' => operators[1].surname, 'email' => operators[1].email)
+            hash_including('id' => operators[1].id.to_s, 'name' => operators[1].name, 'surname' => operators[1].surname,
+                           'email' => operators[1].email, 'contactsCount' => 2),
+            hash_including('id' => operator.id.to_s, 'name' => operator.name, 'surname' => operator.surname,
+                           'email' => operator.email, 'contactsCount' => 1),
+            hash_including('id' => operators[0].id.to_s, 'name' => operators[0].name, 'surname' => operators[0].surname,
+                           'email' => operators[0].email, 'contactsCount' => 0)
           ]
         end
       end
@@ -47,6 +53,7 @@ module Queries
             name
             surname
             email
+            contactsCount
           }
         }
       GQL

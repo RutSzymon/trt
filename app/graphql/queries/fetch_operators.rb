@@ -3,7 +3,7 @@ module Queries
     type [Types::OperatorType], null: false
 
     def resolve
-      Operator.accessible_by(context[:current_ability]).order(created_at: :desc)
+      Operator.accessible_by(context[:current_ability]).order(contacts_count: :desc)
     end
   end
 end

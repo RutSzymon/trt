@@ -49,7 +49,7 @@ shared_examples 'User' do
 
   describe 'DB columns' do
     it 'should have all columns' do
-      columns = %w[id name surname email type created_at updated_at]
+      columns = %w[id name surname email type contacts_count created_at updated_at]
       expect(described_class.column_names).to include(*columns)
     end
   end

@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(version: 2020_11_13_171829) do
     t.string "surname"
     t.string "email"
     t.string "type"
+    t.integer "contacts_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["contacts_count"], name: "index_users_on_contacts_count"
     t.index ["type"], name: "index_users_on_type"
   end
 
