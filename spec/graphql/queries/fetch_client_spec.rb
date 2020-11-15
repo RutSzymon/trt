@@ -22,7 +22,7 @@ module Queries
 
       context 'agent' do
         it 'returns client for provided id' do
-          post '/graphql', params: { query: query(id: client.id) }, headers: operator_header
+          post '/graphql', params: { query: query(id: client.id) }, headers: agent_header
 
           json = JSON.parse(response.body)
           data = json['data']['fetchClient']

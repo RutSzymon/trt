@@ -27,7 +27,7 @@ module Queries
 
       context 'agent' do
         it 'returns all contracts' do
-          post '/graphql', params: { query: query }, headers: operator_header
+          post '/graphql', params: { query: query }, headers: agent_header
 
           json = JSON.parse(response.body)
           data = json['data']['fetchContracts']
