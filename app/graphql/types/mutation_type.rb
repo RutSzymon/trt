@@ -12,6 +12,10 @@ module Types
     field :update_contract, mutation: Mutations::UpdateContract
     field :delete_contract, mutation: Mutations::DeleteContract
 
+    field :add_insurance, mutation: Mutations::AddInsurance
+    field :update_insurance, mutation: Mutations::UpdateInsurance
+    field :delete_insurance, mutation: Mutations::DeleteInsurance
+
     field :add_operator, mutation: Mutations::AddOperator
     field :update_operator, mutation: Mutations::UpdateOperator
     field :delete_operator, mutation: Mutations::DeleteOperator

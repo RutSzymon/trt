@@ -20,6 +20,15 @@ RSpec.describe Insurance, type: :model do
     it { is_expected.to validate_presence_of(:total_cost) }
   end
 
+  describe 'via instance methods' do
+    describe '#monthly_cost' do
+      it 'should return total_cost divided by period' do
+        subject.assign_attributes(total_cost: 2400, period: 7)
+        expect(subject.monthly_cost).to eq(342.86)
+      end
+    end
+  end
+
   describe 'DB columns' do
     it 'should have all columns' do
       columns = %w[id name agency_name kind total_cost period created_at updated_at]

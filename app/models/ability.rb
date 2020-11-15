@@ -7,6 +7,7 @@ class Ability
     else
       can %i[read create update], [Client, Contract]
       can %i[read update], [Agent], id: user.id
+      can [:read], [Insurance]
       can [:read], [Operator], id: user.contact_ids
     end
   end

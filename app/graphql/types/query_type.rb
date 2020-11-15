@@ -12,6 +12,9 @@ module Types
     field :fetch_contracts, resolver: Queries::FetchContracts
     field :fetch_contract, resolver: Queries::FetchContract
 
+    field :fetch_insurances, resolver: Queries::FetchInsurances
+    field :fetch_insurance, resolver: Queries::FetchInsurance
+
     field :fetch_operators, resolver: Queries::FetchOperators
     field :fetch_operator, resolver: Queries::FetchOperator
   end

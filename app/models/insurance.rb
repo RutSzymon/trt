@@ -7,4 +7,8 @@ class Insurance < ApplicationRecord
   validates :name, presence: true
   validates :period, presence: true
   validates :total_cost, presence: true
+
+  def monthly_cost
+    (BigDecimal(total_cost) / period).round(2)
+  end
 end
